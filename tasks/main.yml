@@ -1,0 +1,20 @@
+---
+# tasks file for conesphere.mail.spamassassin
+- openbsd_pkg:
+    name: spampd
+    state: latest
+- lineinfile:
+    dest: /etc/rc.conf.local
+    regexp: "^spampd_flags="
+    #line: 'spampd_flags="--a --aw --p=/var/spampd/spampd.pid --host={{ ansible_facts.ansible_default_ipv4.address }}:25 --relayhost=router.mail.csph.cloud:25"'
+    line: 'spampd_flags="--a --aw --p=/var/spampd/spampd.pid --host={{ ansible_default_ipv4.address }}:25 --relayhost=router.mail.csph.cloud:25"'
+    create: yes
+  notify: restart_spampd
+- template:
+    src: local.cf.j2
+    dest: /etc/mail/spamassassin/local.cf
+    mode: "0644"
+    owner: root
+    group: wheel
+  notify: restart_spampd
+

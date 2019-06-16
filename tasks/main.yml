@@ -17,4 +17,11 @@
     owner: root
     group: wheel
   notify: restart_spampd
+- template:
+    src: smtpd.conf.j2
+    dest: /etc/mail/smtpd.conf
+    mode: "0644"
+    owner: root
+    group: wheel
+  notify: restart_smtpd
 

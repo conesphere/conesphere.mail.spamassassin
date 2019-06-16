@@ -8,4 +8,8 @@
   #  name: spampd
   #  enabled: yes
   #  state: restarted
+- name: restart_smtpd
+  shell: |
+    rcctl enable smtpd
+    rcctl restart smtpd
 

@@ -11,6 +11,13 @@
     create: yes
   notify: restart_spampd
 - template:
+        src: rules.cf.j2
+    dest: /etc/mail/spamassassin/local_rules.cf
+    mode: "0644"
+    owner: root
+    group: wheel
+  notify: restart_spampd
+- template:
     src: local.cf.j2
     dest: /etc/mail/spamassassin/local.cf
     mode: "0644"

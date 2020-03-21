@@ -1,0 +1,8 @@
+#
+# This is a local ruleset to be loaded to spampd to filter out even more spam
+#
+{% for sa_rname in sa_rules.keys()|sort %}
+{% for sa_rkey in sa_rules[sa_rname].keys()|sort %}
+{{ sa_rkey }}    {{ sa_rname }}    {{ sa_rules[sa_rname][sa_rkey] }}
+{% endfor %}
+{% endfor %}

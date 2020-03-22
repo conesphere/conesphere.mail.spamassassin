@@ -1,13 +1,19 @@
 ---
 # handlers file for conesphere.mail.spamassassin
 - name: restart_spampd
-  shell: |
-    rcctl enable spampd
-    rcctl restart spampd
-  #service:
-  #  name: spampd
-  #  enabled: yes
-  #  state: restarted
+  block:
+    - name: restart spamd main
+      shell: |
+        rcctl enable spampd
+        rcctl restart spampd
+  rescue:
+    - name: delay retry
+      wait_for:
+        timeout: 10
+    - name: restart spamd rescue
+      shell: |
+        rcctl enable spampd
+        rcctl restart spampd
 - name: restart_smtpd
   shell: |
     rcctl enable smtpd

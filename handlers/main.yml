@@ -1,7 +1,9 @@
 ---
 # handlers file for conesphere.mail.spamassassin
 - name: restart_spampd
-  import_tasks: tasks/restart_spampd.yml
+  shell: |
+    rcctl enable spampd
+    rcctl restart spampd || ( sleep 20 ; rcctl restart spampd ) 
 - name: restart_smtpd
   shell: |
     rcctl enable smtpd

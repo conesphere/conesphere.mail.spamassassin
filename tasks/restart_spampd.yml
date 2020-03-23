@@ -1,0 +1,16 @@
+---
+# this list of tasks restarts spampd
+- block:
+    - name: restart spamd main
+      shell: |
+        rcctl enable spampd
+        rcctl restart spampd
+  rescue:
+    - name: delay retry
+      wait_for:
+        timeout: 10
+    - name: restart spamd rescue
+      shell: |
+        rcctl enable spampd
+        rcctl restart spampd
+

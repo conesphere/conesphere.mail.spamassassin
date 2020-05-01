@@ -1,2 +1,4 @@
 ---
 # defaults file for conesphere.mail.spamassassin
+smtpd_router_host: 'router.example.com'
+

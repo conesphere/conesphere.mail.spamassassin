@@ -7,7 +7,7 @@
     dest: /etc/rc.conf.local
     regexp: "^spampd_flags="
     #line: 'spampd_flags="--a --aw --p=/var/spampd/spampd.pid --host={{ ansible_facts.ansible_default_ipv4.address }}:25 --relayhost=router.mail.csph.cloud:25"'
-    line: 'spampd_flags=--a --aw --maxsize={{ sa_spampd_maxsize|default("20480") }} --p=/var/spampd/spampd.pid --host={{ ansible_default_ipv4.address }}:25 --relayhost=router.mail.csph.cloud:25'
+    line: 'spampd_flags=--a --aw --maxsize={{ sa_spampd_maxsize|default("20480") }} --p=/var/spampd/spampd.pid --host={{ ansible_default_ipv4.address }}:25 --relayhost={{ smtpd_router_host }}:25'
     create: yes
   notify: restart_spampd
 - template:

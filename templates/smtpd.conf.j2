@@ -16,7 +16,7 @@ action "local" maildir
 {% endif %}
 
 # note this is a TODO in this class to make that hostname configurable
-action "relay" relay helo {{ ansible_hostname }} tls no-verify host smtp://router.mail.csph.cloud
+action "relay" relay helo {{ ansible_hostname }} tls no-verify host smtp://{{ smtpd_router_host }}
 
 # Uncomment the following to accept external mail for domain "example.org"
 #
